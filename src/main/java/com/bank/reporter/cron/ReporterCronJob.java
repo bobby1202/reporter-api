@@ -1,4 +1,4 @@
-package com.bank.reporter.Cron;
+package com.bank.reporter.cron;
 
 import com.bank.reporter.service.ReporterService;
 import lombok.extern.slf4j.Slf4j;
