@@ -1,7 +1,6 @@
 package com.bank.reporter.controller;
 
 import com.bank.reporter.service.ReporterService;
-import com.bank.reporter.service.ReporterServiceImpl;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;

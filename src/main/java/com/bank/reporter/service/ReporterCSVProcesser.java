@@ -1,6 +1,7 @@
 package com.bank.reporter.service;
 
 import com.bank.reporter.model.AggregatedData;
+import lombok.extern.slf4j.Slf4j;
 import org.joda.time.Duration;
 import org.joda.time.LocalDateTime;
 import org.springframework.stereotype.Service;
@@ -10,6 +11,7 @@ import java.util.Map;
 
 import static com.bank.reporter.util.DateUtil.convertStringToLocalDateTime;
 
+@Slf4j
 @Service
 public class ReporterCSVProcesser {
 
@@ -20,6 +22,7 @@ public class ReporterCSVProcesser {
      * @param aggregatedDataMap Map containing aggregated data
      */
     public void processBatchData(List<String[]> csvBatch, Map<String, AggregatedData> aggregatedDataMap) {
+        log.info("Processing incident data..");
         csvBatch.stream()
                 .forEach(row -> {
                     String assetName = row[0];

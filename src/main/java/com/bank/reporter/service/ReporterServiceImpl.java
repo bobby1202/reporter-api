@@ -6,8 +6,6 @@ import com.opencsv.CSVReader;
 import com.opencsv.CSVWriter;
 import com.opencsv.exceptions.CsvException;
 import lombok.extern.slf4j.Slf4j;
-import org.joda.time.Duration;
-import org.joda.time.LocalDateTime;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -18,8 +16,6 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
-import static com.bank.reporter.util.DateUtil.convertStringToLocalDateTime;
 
 @Slf4j
 @Service
@@ -57,8 +53,6 @@ public class ReporterServiceImpl implements ReporterService{
             while (processedRows < totalRows) {
                 int endIndex = Math.min(processedRows + batchSize, totalRows);
                 List<String[]> currentCSVBatch = csvReaderRows.subList(processedRows, endIndex);
-
-                //processBatchData(currentCSVBatch, aggregatedDataMap);
                 reporterCSVProcesser.processBatchData(currentCSVBatch, aggregatedDataMap);
                 processedRows += batchSize;
             }
@@ -69,24 +63,4 @@ public class ReporterServiceImpl implements ReporterService{
             throw new ReporterException(e.getMessage(), e);
         }
     }
-
-    /**
-     * Processes a batch of incidents and updates the aggregated data map.
-     *
-     * @param csvBatch           Batch of incident data from the CSV file
-     * @param aggregatedDataMap Map containing aggregated data
-     */
-//    private void processBatchData(List<String[]> csvBatch, Map<String, AggregatedData> aggregatedDataMap) {
-//        csvBatch.stream()
-//                .forEach(row -> {
-//                    String assetName = row[0];
-//                    LocalDateTime startTime = convertStringToLocalDateTime(row[1]);
-//                    LocalDateTime endTime = convertStringToLocalDateTime(row[2]);
-//                    int severity = Integer.parseInt(row[3]);
-//                    //Calculate time difference between startTime and endTime in seconds
-//                    long durationInSeconds = new Duration(startTime.toDateTime(), endTime.toDateTime()).getStandardSeconds();
-//                    aggregatedDataMap.computeIfAbsent(assetName, k -> new AggregatedData())
-//                            .addIncident(severity, durationInSeconds);
-//                });
-//    }
 }
